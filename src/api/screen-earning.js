@@ -1,5 +1,6 @@
-import request from '@/utils/request'
+import request from "@/utils/request";
 
-module.exports = {
-  getScreenEarnList: params => request({url: 'v1/profit/list', method: 'get', params})
+// 获取屏幕收益列表
+export function getScreenEarnList(params) {
+  return request({ url: "v1/profit/list", method: "get", params });
 }

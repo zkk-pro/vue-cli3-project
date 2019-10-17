@@ -8,11 +8,11 @@ function resolve(dir) {
 
 const name = defaultSettings.title || '租赁公司管理系统' // page title
 
-const port = process.env.port || process.env.npm_config_port || 8080 // dev port
+const port = process.env.port || process.env.npm_config_port || 8888 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  publicPath: '/',
+  publicPath: process.env.VUE_APP_IS_TEST === 'true' ? '/lease/': '/',
   outputDir: 'dist',
   assetsDir: 'static',
   // lintOnSave: process.env.NODE_ENV === 'development',

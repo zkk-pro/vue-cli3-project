@@ -19,16 +19,16 @@
       <el-button type="info" plain @click="handleImport">导出结算记录</el-button>
       <div class="table-box">
         <el-table :data="tableData" v-loading="tableLoading" border style="width: 100%;">
-          <el-table-column prop="month" label="提现月份"></el-table-column>
-          <el-table-column prop="userName" label="车主姓名"></el-table-column>
-          <el-table-column prop="phoneNo" label="手机号"></el-table-column>
-          <el-table-column prop="monthProfit" label="当月收入金额"></el-table-column>
-          <el-table-column prop="base" label="屏幕-基础收益"></el-table-column>
-          <el-table-column prop="reward" label="屏幕-奖励金"></el-table-column>
-          <el-table-column prop="extend" label="推广收益"></el-table-column>
-          <el-table-column prop="charge" label="充电收益"></el-table-column>
-          <el-table-column prop="total" label="屏幕累计收益"></el-table-column>
-          <el-table-column prop="payProfit" label="当月应打款金额">
+          <el-table-column align="center" prop="month" label="提现月份"></el-table-column>
+          <el-table-column align="center" prop="userName" label="车主姓名"></el-table-column>
+          <el-table-column align="center" prop="phoneNo" label="手机号"></el-table-column>
+          <el-table-column align="center" prop="monthProfit" label="当月收入金额"></el-table-column>
+          <el-table-column align="center" prop="base" label="屏幕-基础收益"></el-table-column>
+          <el-table-column align="center" prop="reward" label="屏幕-奖励金"></el-table-column>
+          <el-table-column align="center" prop="extend" label="推广收益"></el-table-column>
+          <el-table-column align="center" prop="charge" label="充电收益"></el-table-column>
+          <el-table-column align="center" prop="total" label="屏幕累计收益"></el-table-column>
+          <el-table-column align="center" prop="payProfit" label="当月应打款金额">
             <template slot-scope="scope">
               <!-- 当月应打款金额小于0时，显示0 -->
               {{scope.row.payProfit > 0 ? scope.row.payProfit: 0 }}

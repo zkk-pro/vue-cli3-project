@@ -21,18 +21,18 @@
       <el-button type="info" plain @click="handleImport">导出车主信息</el-button>
       <div class="table-box">
         <el-table v-loading="tableLoading" :data="tableData" border style="width: 100%;">
-          <el-table-column prop="realName" label="姓名"></el-table-column>
-          <el-table-column prop="plateNo" label="车牌号"></el-table-column>
-          <el-table-column prop="phoneNo" label="手机号"></el-table-column>
-          <el-table-column prop="carModelName" label="车型"></el-table-column>
-          <el-table-column prop="carColor" label="车身颜色"></el-table-column>
-          <el-table-column prop="leaseCompany" label="租赁公司"></el-table-column>
-          <el-table-column prop="idCard" label="身份证号"></el-table-column>
-          <el-table-column prop="createDate" label="注册时间"></el-table-column>
-          <el-table-column prop="updateDate" label="提交时间"></el-table-column>
-          <el-table-column prop="auditStatusStr" label="审核状态"></el-table-column>
-          <el-table-column prop="auditorStr" label="审核方"></el-table-column>
-          <el-table-column prop="address" label="操作" width="220px">
+          <el-table-column align="center" prop="realName" label="姓名"></el-table-column>
+          <el-table-column align="center" prop="plateNo" label="车牌号"></el-table-column>
+          <el-table-column align="center" prop="phoneNo" label="手机号"></el-table-column>
+          <el-table-column align="center" prop="carModelName" label="车型"></el-table-column>
+          <el-table-column align="center" prop="carColor" label="车身颜色"></el-table-column>
+          <el-table-column align="center" prop="leaseCompany" label="租赁公司"></el-table-column>
+          <el-table-column align="center" prop="idCard" label="身份证号" width="180"></el-table-column>
+          <el-table-column align="center" prop="createDate" label="注册时间" width="160"></el-table-column>
+          <el-table-column align="center" prop="updateDate" label="提交时间" width="160"></el-table-column>
+          <el-table-column align="center" prop="auditStatusStr" label="审核状态"></el-table-column>
+          <el-table-column align="center" prop="auditorStr" label="审核方"></el-table-column>
+          <el-table-column align="center" prop="address" label="操作" width="220px">
             <template slot-scope="scope">
               <el-button
                 :disabled="disabledBtn(scope.row.auditStatus)"
@@ -78,8 +78,7 @@ export default {
         { label: "认证审核", value: 0 },
         { label: "修改审核", value: 1 },
         { label: "审核通过", value: 2 },
-        { label: "审核驳回", value: 3 },
-        { label: "无需审核", value: 4 }
+        { label: "审核驳回", value: 3 }
       ],
       req_params: {
         pageSize: 10,

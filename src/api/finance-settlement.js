@@ -1,6 +1,6 @@
-import request from '@/utils/request'
+import request from "@/utils/request";
 
-module.exports = {
-  // 获取结算列表
-  getSettlementList: params => request({url: 'v1/drawMoney/list', method: 'get', params})
+// 获取结算列表
+export function getSettlementList(params) {
+  return request({ url: "v1/drawMoney/list", method: "get", params });
 }
