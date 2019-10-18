@@ -10,7 +10,7 @@ import { getToken } from "@/utils/auth";
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  timeout: 5000, // request timeout
+  timeout: 1000 * 30, // request timeout 30s
   responseType: "blob"
 });
 
@@ -49,7 +49,7 @@ service.interceptors.response.use(
               reject(new Error(res.msg || "Error"))
             } else if (res.code && res.code === 3000) {
               MessageBox.confirm(
-                "你已登出，点击取消停留在本页面或点击重新登录",
+                "登陆已过期，点击取消停留在本页面或点击重新登录",
                 "确认登出",
                 {
                   confirmButtonText: "重新登录",

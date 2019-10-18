@@ -68,7 +68,7 @@
 <script>
 import { getCarList, carAudit } from "@/api/car-owner-audit";
 import { exportCarOwnerData } from "@/api/export-table";
-import exportTable from '@/mixins/export-table'
+import CommonMixins from '@/mixins/common-methods.js'
 
 export default {
   data() {
@@ -91,7 +91,7 @@ export default {
       total: 0
     };
   },
-  mixins: [exportTable],
+  mixins: [CommonMixins],
   methods: {
     disabledBtn(status) {
       return status === 2 || status === 3 || status === 4;
@@ -137,7 +137,7 @@ export default {
     // 导出数据
     async exportCarOwnerData() {
       let data = await exportCarOwnerData(this.req_params);
-      this.exportData(data, '车主信息') // mixin 里的方法
+      this.mixin_exportData(data, '车主信息') // mixin 里的方法
     },
     // 车辆审核操作
     async carAudit(params) {

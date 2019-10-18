@@ -40,7 +40,7 @@ service.interceptors.response.use(
       // 状态码3000 表示未登录
       if (res.code === 3000) {
         // to re-login
-        MessageBox.confirm('你已登出，点击取消停留在本页面或点击重新登录', '确认登出', {
+        MessageBox.confirm('登陆已过期，点击取消停留在本页面或点击重新登录', '确认登出', {
           confirmButtonText: '重新登录',
           cancelButtonText: '取消',
           type: 'warning'

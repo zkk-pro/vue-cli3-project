@@ -5,6 +5,7 @@
       <el-date-picker
         v-model="req_params.dateStr"
         type="month"
+        :picker-options="pickerOptions"
         value-format="yyyy-MM"
         placeholder="选择月"
       ></el-date-picker>
@@ -34,7 +35,10 @@
               {{scope.row.payProfit > 0 ? scope.row.payProfit: 0 }}
             </template>
           </el-table-column>
-          <el-table-column prop="address" label="结算状态"></el-table-column>
+          <el-table-column align="center" label="结算状态">
+            <!-- 写死的 '-'  -->
+            <template slot-scope>-</template>
+          </el-table-column>
         </el-table>
       </div>
       <el-pagination
@@ -46,6 +50,7 @@
         @current-change="handleCurrentChange"
         style="text-align:right"
       ></el-pagination>
+      <p class="tips">财务以线下结算为准</p>
     </el-card>
   </div>
 </template>
@@ -53,10 +58,15 @@
 <script>
 import { getSettlementList } from "@/api/finance-settlement";
 import { exportSettlementData } from "@/api/export-table";
-import exportTable from "@/mixins/export-table";
+import CommonMixins from "@/mixins/common-methods";
 export default {
   data() {
     return {
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now() - 86400000 * new Date().getDate();
+        }
+      },
       req_params: {
         pageSize: 10,
         pageNum: 1,
@@ -68,7 +78,7 @@ export default {
       total: 0
     };
   },
-  mixins: [exportTable],
+  mixins: [CommonMixins],
   methods: {
     // 搜索
     handleSearch() {
@@ -77,7 +87,7 @@ export default {
     },
     // 导出
     handleImport() {
-      this.exportSettlementData()
+      this.exportSettlementData();
     },
     // currentPage 改变时
     handleCurrentChange(page) {
@@ -86,7 +96,7 @@ export default {
     // 导出结算记录数据
     async exportSettlementData() {
       let data = await exportSettlementData(this.req_params);
-      this.exportData(data, '结算记录') // mixin 里的方法
+      this.mixin_exportData(data, "结算记录"); // mixin 里的方法
     },
     // 获取结算列表
     async getSettlementList() {
@@ -98,7 +108,23 @@ export default {
     }
   },
   created() {
+    // 默认参数 mixin_addZero -> mixins里的方法
+    const d = new Date();
+    const Y = this.mixin_addZero(d.getFullYear());
+    const M = this.mixin_addZero(d.getMonth()); // 前一个月时间
+    this.req_params.dateStr = `${Y}-${M}`;
     this.getSettlementList();
   }
 };
 </script>
+
+<style lang="less" scoped>
+.tips {
+  color: rgb(128, 123, 123);
+  margin: 0;
+  &::before {
+    content: "*";
+    color: #f00;
+  }
+}
+</style>
