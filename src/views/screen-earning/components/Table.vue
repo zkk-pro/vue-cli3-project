@@ -5,6 +5,7 @@
       v-model="req_params.dateStr"
       :type="datePickerType()"
       :editable="false"
+      :clearable="false"
       :value-format="dateFormat()"
       :placeholder="dateText()"
     ></el-date-picker>
@@ -26,7 +27,7 @@
         <el-table-column align="center" prop="reward" label="奖励金"></el-table-column>
         <el-table-column align="center" prop="extend" label="推广收益"></el-table-column>
         <el-table-column align="center" prop="charge" label="充电收益"></el-table-column>
-        <el-table-column align="center" prop="total" label="当月收益金额" v-if="showType === '2'"></el-table-column>
+        <el-table-column align="center" prop="total" label="当月收入金额" v-if="showType === '2'"></el-table-column>
         <el-table-column align="center" prop="total" label="总收入金额" v-if="showType === '3'"></el-table-column>
       </el-table>
     </div>
@@ -40,7 +41,7 @@
       @current-change="handleCurrentChange"
       style="text-align:right"
     ></el-pagination>
-    <p class="tips" v-if="showType==='2'">当月收入金额=屏幕累计收益+奖励金+推广收益+充电收益</p>
+    <p class="tips" v-if="showType==='2'">当月收入金额=屏幕基础收益+奖励金+推广收益+充电收益</p>
   </div>
 </template>
 
@@ -118,6 +119,7 @@ export default {
     },
     handleCurrentChange(page) {
       this.req_params.pageNum = page;
+      this.getScreenEarnList()
     },
     // 导出数据接口
     async exportScreenEarningData() {
@@ -140,7 +142,7 @@ export default {
         const d = new Date();
         const Y = this.mixin_addZero(d.getFullYear());
         const M = this.mixin_addZero(d.getMonth() + 1);
-        const D = this.mixin_addZero(d.getDate() - 1); // 前一天的时间
+        const D = this.mixin_addZero(d.getDate());
         const m = this.mixin_addZero(d.getSeconds());
         if (value === "1") {
           this.req_params.dateStr = `${Y}-${M}-${D}`;

@@ -5,7 +5,7 @@
       <el-date-picker
         v-model="req_params.dateStr"
         type="month"
-        :picker-options="pickerOptions"
+        :clearable="false"
         value-format="yyyy-MM"
         placeholder="选择月"
       ></el-date-picker>
@@ -62,11 +62,6 @@ import CommonMixins from "@/mixins/common-methods";
 export default {
   data() {
     return {
-      pickerOptions: {
-        disabledDate(time) {
-          return time.getTime() > Date.now() - 86400000 * new Date().getDate();
-        }
-      },
       req_params: {
         pageSize: 10,
         pageNum: 1,
@@ -92,6 +87,7 @@ export default {
     // currentPage 改变时
     handleCurrentChange(page) {
       this.req_params.pageNum = page;
+      this.getSettlementList()
     },
     // 导出结算记录数据
     async exportSettlementData() {
@@ -111,7 +107,7 @@ export default {
     // 默认参数 mixin_addZero -> mixins里的方法
     const d = new Date();
     const Y = this.mixin_addZero(d.getFullYear());
-    const M = this.mixin_addZero(d.getMonth()); // 前一个月时间
+    const M = this.mixin_addZero(d.getMonth() + 1);
     this.req_params.dateStr = `${Y}-${M}`;
     this.getSettlementList();
   }
