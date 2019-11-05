@@ -12,7 +12,7 @@ const port = process.env.port || process.env.npm_config_port || 8888 // dev port
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
-  publicPath: process.env.VUE_APP_IS_TEST === 'true' ? '/lease/': '/',
+  publicPath: process.env.VUE_APP_IS_TEST === 'true' ? '/web/lease/': '/',
   outputDir: 'dist',
   assetsDir: 'static',
   // lintOnSave: process.env.NODE_ENV === 'development',
